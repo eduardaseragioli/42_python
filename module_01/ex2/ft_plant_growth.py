@@ -1,13 +1,13 @@
 class Plant:
     """Represents a plant in the garden with growth capabilities.
-    
+
     Attributes:
         name (str): The name of the plant
         height (int): The height of the plant in centimeters
         age (int): The age of the plant in days
         initial_height (int): The initial height used to track growth
     """
-    
+
     def __init__(self, name: str, height: int, age: int):
         """Initializes a new plant.
         """
@@ -26,15 +26,16 @@ class Plant:
 
     def get_info(self) -> str:
         """Returns formatted information about the plant.
-        
+
         Returns:
             A string containing the plant's name, height, and age
         """
         return f"{self.name}: {self.height}cm, {self.age_day} days old"
-    
+
+
 def ft_plant_growth() -> None:
     """Simulates plant growth over a week.
-    
+
     Creates multiple plants and displays their information at day 1 and day 7,
     showing how they grow over time with increments in height and age.
 
@@ -62,6 +63,7 @@ def ft_plant_growth() -> None:
     print(cac.get_info())
 
     print(f"Growth this week: +{rose.height - rose.initial_height}cm\n")
+
 
 if __name__ == "__main__":
     ft_plant_growth()

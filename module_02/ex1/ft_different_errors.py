@@ -1,40 +1,51 @@
-def garden_operations():
+def garden_operations(error_type: str) -> None:
     try:
-        temp = int("abc")
+        if error_type == "value":
+            int("abc")
+        elif error_type == "division":
+            _ = 10 / 0
+        elif error_type == "file":
+            open("missing.txt", "r")
+        elif error_type == "key":
+            dictionary = {'flower': 'rose',
+                          'tree': 'olive'}
+            _ = dictionary['missing_plant']
     except ValueError:
-        print("\nTesting ValueError...")
         print("Caught ValueError: invalid literal for int()")
-
-    try:
-        result = 10 / 0
     except ZeroDivisionError:
-        print("\nTesting ZeroDivisionError...")
         print("Caught ZeroDivisionError: division by zero")
-
-    try:
-        with open('missing.txt', 'r') as file:
-            content = file.read()
     except FileNotFoundError:
-        print("\nTesting FileNotFoundError...")
         print("Caught FileNotFoundError: No such file 'missing.txt'")
-
-    try:
-        dictionary = {'flower': 'rose',
-                        'tree': 'olive'}
-        print(dictionary['missing_plant'])
     except KeyError:
-        print("\nTesting KeyError...")
-        print("Caught KeyError: 'missing\_plant'")
+        print("Caught KeyError: 'missing_plant'")
 
-    print("\nTesting multiple errors together...")
     try:
-        temp = int("xyz")
-        result = 10 / 0
-    except (ValueError, ZeroDivisionError):
+        if error_type == "multiple":
+            raise TypeError("multiple error")
+    except (PermissionError, NameError, OverflowError, TypeError):
         print("Caught an error, but program continues!")
 
 
-if __name__ == "__main__":
+def test_error_types():
     print("=== Garden Error Types Demo ===")
-    garden_operations()
+
+    print("\nTesting ValueError...")
+    garden_operations("value")
+
+    print("\nTesting ZeroDivisionError...")
+    garden_operations("division")
+
+    print("\nTesting FileNotFoundError...")
+    garden_operations("file")
+
+    print("\nTesting KeyError...")
+    garden_operations("key")
+
+    print("\nTesting multiple errors together...")
+    garden_operations("multiple")
+
     print("\nAll error types tested successfully!")
+
+
+if __name__ == "__main__":
+    test_error_types()

@@ -1,6 +1,6 @@
 class Plant:
     """Base class for all plants with common attributes."""
-    
+
     def __init__(self, name: str, height: int, age: int):
         """Initialize a plant with basic attributes.
         Args:
@@ -15,7 +15,8 @@ class Plant:
     def base_info(self) -> str:
         """Return formatted string with height and age information."""
         return f"{self.height}cm, {self.age} days"
-    
+
+
 class Flower(Plant):
     """Flower type plant with color attribute and bloom capability."""
 
@@ -26,34 +27,41 @@ class Flower(Plant):
 
     def bloom(self) -> str:
         """Display blooming message for the flower."""
-        print (f"{self.name} is blooming beautifully!")
+        print(f"{self.name} is blooming beautifully!")
 
     def get_inf_flower(self):
         """Display complete information about the flower."""
-        print (f"\n{self.name} (Flower): {self.base_info()}, {self.color} color")
+        print(
+            f"\n{self.name} (Flower): "
+            + f"{self.base_info()}, {self.color} color")
+
 
 class Tree(Plant):
     """Tree type plant with trunk diameter and shade production."""
 
     def __init__(self, trunk_diameter: int, name: str, height: int, age: int):
-        """Initialize a tree with trunk diameter and basic plant attributes. """
+        """Initialize a tree with trunk diameter and basic plant attributes"""
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
 
     def produce_shade(self):
         """Display the amount of shade provided by the tree."""
-        shade = 78
+        shade = (self.trunk_diameter * self.height) // 320
         print(f"{self.name} provides {shade} square meters of shade")
-    
+
     def get_inf_tree(self):
         """Display complete information about the tree."""
-        print(f"\n{self.name} (Tree): {self.base_info()}, {self.trunk_diameter}cm diameter")
+        print(
+            f"\n{self.name} (Tree): {self.base_info()}, "
+            + f"{self.trunk_diameter}cm diameter")
+
 
 class Vegetable(Plant):
     """Vegetable type plant with harvest season and nutritional value."""
 
-    def __init__(self, harvest_season: str, nutritional_value: str, name: str, height: int, age: int):
-        """Initialize a vegetable with harvest info and basic plant attributes."""
+    def __init__(self, harvest_season: str, nutritional_value: str,
+                 name: str, height: int, age: int):
+        """Initialize vegetable with harvest info and basic plant attributes"""
         super().__init__(name, height, age)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
@@ -61,10 +69,13 @@ class Vegetable(Plant):
     def nutri_int(self):
         """Display the nutritional value of the vegetable."""
         print(f"{self.name} is rich in {self.nutritional_value}")
-    
+
     def get_inf_veg(self):
         """Display complete information about the vegetable."""
-        print(f"\n{self.name} (Vegetable): {self.base_info()}, {self.harvest_season} harvest")
+        print(
+            f"\n{self.name} (Vegetable): {self.base_info()}, "
+            + f"{self.harvest_season} harvest")
+
 
 if __name__ == "__main__":
     print("=== Garden Plant Types ===")
@@ -73,7 +84,7 @@ if __name__ == "__main__":
     rose.get_inf_flower()
     rose.bloom()
 
-    daisy = Flower("yellow", "Daisy",20, 45)
+    daisy = Flower("yellow", "Daisy", 20, 45)
     daisy.get_inf_flower()
     daisy.bloom()
 
