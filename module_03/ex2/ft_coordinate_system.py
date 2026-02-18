@@ -1,6 +1,7 @@
 import sys
 import math
 
+
 def exercise_tuple():
     print("=== Game Coordinate System ===")
 
@@ -27,8 +28,10 @@ def exercise_tuple():
     coordinates_split = (x, y, z)
     print(f"Parsed position: {coordinates_split}")
 
-    distance_split = float = math.sqrt(coordinates_split[0]**2 + coordinates_split[1]**2 + coordinates_split[2]**2)
-    print(f"Distance between {num_inicial} and {coordinates_split}: {distance_split}")
+    distance_split = float = math.sqrt(
+        coordinates_split[0]**2 + coordinates_split[1]**2 + coordinates_split[2]**2)
+    print(
+        f"Distance between {num_inicial} and {coordinates_split}: {distance_split}")
 
     coordinates_str: str = "abc,def,ghi"
     print(f"\nParsing invalid coordinates: \"{coordinates_str}\"")
@@ -45,7 +48,9 @@ def exercise_tuple():
     print("\nUnpacking demonstration:")
     x, y, z = coordinates_split
     print(f"Player at x={x}, y={y}, z={z}")
-    print(f"Coordinates: X={coordinates_split[0]}, Y={coordinates_split[1]}, Z={coordinates_split[2]}")
+    print(
+        f"Coordinates: X={coordinates_split[0]}, Y={coordinates_split[1]}, Z={coordinates_split[2]}")
+
 
 if __name__ == "__main__":
     exercise_tuple()

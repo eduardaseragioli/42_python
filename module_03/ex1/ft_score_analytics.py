@@ -1,5 +1,6 @@
 import sys
 
+
 def points():
     args = sys.argv[1:]
     scores = []
@@ -7,13 +8,16 @@ def points():
     print("=== Player Score Analytics ===")
 
     if len(args) < 2:
-        print("No scores provided. Usage: python3 ft_score_analytics.py <score1> <score2> ...")
+        print(
+            "No scores provided. Usage: python3 ft_score_analytics.py "
+            "<score1> <score2> ...")
     else:
         for arg in args:
             try:
                 scores.append(int(arg))
             except ValueError:
-                print(f"Warning: {arg} is not a valid score and will be ignored.")
+                print(
+                    f"Warning: {arg} is not a valid score and will be ignored")
 
         print(f"Scores processed: {scores}")
         print(f"Total players: {len(scores)}")
@@ -22,6 +26,7 @@ def points():
         print(f"High score: {max(scores)}")
         print(f"Low score: {min(scores)}")
         print(f"Score range: {max(scores) - min(scores)}")
+
 
 if __name__ == "__main__":
     points()

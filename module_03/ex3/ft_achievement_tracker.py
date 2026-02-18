@@ -1,12 +1,15 @@
 import sys
 
-def achivement ():
+
+def achivement():
 
     print("=== Achievement Tracker System ===")
 
-    alice: set[str] = {'first_kill', 'level_10', 'treasure_hunter', 'speed_demon'}
+    alice: set[str] = {'first_kill', 'level_10',
+                       'treasure_hunter', 'speed_demon'}
     bob: set[str] = {'first_kill', 'level_10', 'boss_slayer', 'collector'}
-    charlie: set[str] = {'level_10', 'treasure_hunter', 'boss_slayer', 'speed_demon', 'perfectionist'}
+    charlie: set[str] = {'level_10', 'treasure_hunter',
+                         'boss_slayer', 'speed_demon', 'perfectionist'}
 
     print(f"\nPlayer alice achievements: {alice}")
     print(f"Player bob achievements: {bob}")
@@ -18,7 +21,7 @@ def achivement ():
     print(f"All unique achievements: {all_achivement}")
     print(f"Total unique achievements: {len_all_achivement}")
 
-    common_achivement =  alice.intersection(bob, charlie)
+    common_achivement = alice.intersection(bob, charlie)
     print(f"\nCommon to all players: {common_achivement}")
 
     alice_unique: set[str] = alice - bob - charlie
@@ -36,6 +39,7 @@ def achivement ():
 
     bob_unique_alice = bob.difference(alice)
     print(f"Bob unique: {bob_unique_alice}")
+
 
 if __name__ == "__main__":
     achivement()
