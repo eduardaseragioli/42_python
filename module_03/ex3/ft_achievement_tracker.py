@@ -1,6 +1,3 @@
-import sys
-
-
 def achivement():
 
     print("=== Achievement Tracker System ===")
