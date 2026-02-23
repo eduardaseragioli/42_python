@@ -2,27 +2,39 @@ import sys
 
 
 def inventory_system() -> None:
-    args = sys.argv[1:]
-    dictionary = {}
+    """
+    Analyze and manage inventory from command-line arguments"""
+    args: list[str] = sys.argv[1:]
+    dictionary: dict[str, int] = {}
 
     print("=== Inventory System Analysis ===")
 
-    try:
-        for arg in args:
+    for arg in args:
+        try:
+            name: str
+            quantity: str
             name, quantity = arg.split(":")
             dictionary[name] = int(quantity)
-    except ValueError:
-        print("Error: output invalid")
+        except ValueError:
+            print(f"Error: '{arg}' is not in the correct"
+                  + "format (expected item:quantity)")
+            print("Usage: python3 ft_inventory_system.py"
+                  + "sword:10 potion:5 shield:3")
+            return
 
-    total_units = sum(dictionary.values())
+    if len(dictionary) == 0:
+        print("No valid items provided")
+        return
+
+    total_units: int = sum(dictionary.values())
     print(f"Total items in inventory: {total_units}")
     print(f"Unique item type: {len(args)}")
 
     print("\n=== Current Inventory ===")
-    sorted_dict = dict(
+    sorted_dict: dict[str, int] = dict(
         sorted(dictionary.items(), key=lambda x: x[1], reverse=True))
     for item, quantity in sorted_dict.items():
-        percentage = (quantity / total_units) * 100
+        percentage: float = (quantity / total_units) * 100
         if quantity == 1:
             print(f"{item}: {quantity} unit ({percentage:.1f})")
         else:
@@ -30,11 +42,11 @@ def inventory_system() -> None:
 
     print("\n=== Inventory Statistics ===")
 
-    most_abundant = max(dictionary, key=dictionary.get)
-    min_abundant = min(dictionary, key=dictionary.get)
+    most_abundant: str = max(dictionary, key=dictionary.get)
+    min_abundant: str = min(dictionary, key=dictionary.get)
 
-    most_quantity = dictionary[most_abundant]
-    min_quantity = dictionary[min_abundant]
+    most_quantity: int = dictionary[most_abundant]
+    min_quantity: int = dictionary[min_abundant]
     print(f"Most abundant: {most_abundant} ({most_quantity} units)")
     print(f"Least abundant: {min_abundant} ({min_quantity} unit)")
 
@@ -51,7 +63,8 @@ def inventory_system() -> None:
 
     print("\n=== Management Suggestions ===")
 
-    restock = [item for item, quantity in sorted_dict.items() if quantity <= 1]
+    restock: list[str] = [item for item, quantity in sorted_dict.items()
+                          if quantity <= 1]
     print(f"Restock needed: {restock}")
 
     print("\n=== Dictionary Properties Demo ===")

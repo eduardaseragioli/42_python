@@ -1,7 +1,9 @@
 import math
 
 
-def exercise_tuple():
+def exercise_tuple() -> None:
+    """
+    Demonstrate tuple usage for 3D coordinate system operations."""
     print("=== Game Coordinate System ===")
 
     point: tuple[int, int, int] = (10, 20, 5)
@@ -9,7 +11,7 @@ def exercise_tuple():
 
     print(f"\nPosition created: {point}")
 
-    distance = math.sqrt(point[0]**2 + point[1]**2 + point[2]**2)
+    distance: float = math.sqrt(point[0]**2 + point[1]**2 + point[2]**2)
     print(f"Distance between {num_inicial} and {point}: {distance:.2f}")
 
     coordinates: str = "3,4,0"
@@ -24,10 +26,10 @@ def exercise_tuple():
         print(f"Error parsing coordinates: {e}")
         print(f"Error details - Type: ValueError, Args: {e.args}")
 
-    coordinates_split = (x, y, z)
+    coordinates_split: tuple[int, int, int] = (x, y, z)
     print(f"Parsed position: {coordinates_split}")
 
-    distance_split = math.sqrt(
+    distance_split: float = math.sqrt(
         coordinates_split[0]**2 + coordinates_split[1]**2 +
         coordinates_split[2]**2)
     print(

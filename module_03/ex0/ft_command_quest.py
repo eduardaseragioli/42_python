@@ -1,7 +1,13 @@
 import sys
 
 
-def test():
+def test() -> None:
+    """
+    Display command-line arguments information.
+
+    Prints the program name, number of arguments received,
+    each argument with its position, and the total count of arguments.
+    """
     print("=== Command Quest ===")
 
     args = sys.argv
