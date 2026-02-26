@@ -1,10 +1,16 @@
 def main(file_name: str) -> None:
+    """
+    Recover and display data from an ancient archive file.
+    Opens a file, reads its contents, and displays the recovered data.
+    Handles file access errors and ensures proper file closure.
+    """
     print("\n=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
 
+    file = None
     try:
         file = open(file_name, 'r')
 
-        print(f"Accessing Storage Vault: {file_name}")
+        print(f"\nAccessing Storage Vault: {file_name}")
         print("Connection established...\n")
 
         print("RECOVERED DATA:")
@@ -12,7 +18,7 @@ def main(file_name: str) -> None:
         content = file.read()
         print(content)
 
-        print("Data recovery complete. Storage unit disconnected.")
+        print("\nData recovery complete. Storage unit disconnected.")
 
     except FileNotFoundError:
         print(f"ERROR: Vault {file_name} not found.")
@@ -21,6 +27,7 @@ def main(file_name: str) -> None:
     finally:
         if file:
             file.close()
+
 
 if __name__ == "__main__":
     main("ancient_fragment.txt")

@@ -1,7 +1,13 @@
-def main(file_name: str, content: str) -> None:
+def creation(file_name: str, content: str) -> None:
+    """Create a new archive file and write preservation data to it.
 
+    Opens a file for writing, inscribes the provided content,
+    and ensures proper file closure. Handles permission errors
+    and other exceptions gracefully.
+    """
     print("=== CYBER ARCHIVES - PRESERVATION SYSTEM ===")
 
+    file = None
     try:
         file = open(file_name, "w")
 
@@ -13,7 +19,7 @@ def main(file_name: str, content: str) -> None:
         file.write(content)
         print(content)
 
-        print("\n Data inscription complete. Storage unit sealed.")
+        print("\nData inscription complete. Storage unit sealed.")
         print(f"Archive '{file_name}' ready for long-term preservation.")
 
     except PermissionError:
@@ -24,11 +30,19 @@ def main(file_name: str, content: str) -> None:
         if file:
             file.close()
 
-if __name__ == "__main__":
-    file_name = " new_discovery.txt"
-    content = (
+
+def main() -> None:
+    """
+    Main function to demonstrate archive creation.
+    """
+    file_name: str = "new_discovery.txt"
+    content: str = (
         "[ENTRY 001] New quantum algorithm discovered\n"
         "[ENTRY 002] Efficiency increased by 347%\n"
         "[ENTRY 003] Archived by Data Archivist trainee\n"
     )
-    main(file_name, content)
+    creation(file_name, content)
+
+
+if __name__ == "__main__":
+    main()

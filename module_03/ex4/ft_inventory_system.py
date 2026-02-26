@@ -15,7 +15,7 @@ def inventory_system() -> None:
             quantity: str
             name, quantity = arg.split(":")
             dictionary[name] = int(quantity)
-        except ValueError:
+        except (ValueError, IndexError):
             print(f"Error: '{arg}' is not in the correct"
                   + "format (expected item:quantity)")
             print("Usage: python3 ft_inventory_system.py"
