@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Any, List
+from typing import Any
 
 
-class DataProcessor(ABC): 
+class DataProcessor(ABC):
 
     @abstractmethod
     def process(self, data: Any) -> str:
@@ -25,20 +25,19 @@ class NumericProcessor(DataProcessor):
             if not isinstance(item, (int, float)):
                 return False
         return True
-    
 
     def process(self, data: Any) -> str:
         if not self.validate(data):
-            raise ValueError ("Numeric data verification failed")
+            raise ValueError("Numeric data verification failed")
         count = len(data)
         total = sum(data)
         if count > 0:
             average = total / count
         else:
             average = 0.0
-        result = f"Processed {count} numeric values, sum={total}, avg={average}"
+        result = f"Processed {count} numeric values,"
+        + f"sum={total}, avg={average}"
         return self.format_output(result)
-
 
 
 class TextProcessor(DataProcessor):
@@ -47,7 +46,6 @@ class TextProcessor(DataProcessor):
         if not isinstance(data, str):
             return False
         return True
-        
 
     def process(self, data: Any) -> str:
         if not self.validate(data):
@@ -64,7 +62,6 @@ class LogProcessor(DataProcessor):
         if not isinstance(data, str):
             return False
         return True
-            
 
     def process(self, data: Any) -> str:
         if not self.validate(data):
@@ -83,8 +80,6 @@ class LogProcessor(DataProcessor):
         base_output = super().format_output(result)
         return f"{base_output}"
 
-        
-
 
 def main() -> None:
     print("=== CODE NEXUS - DATA PROCESSOR FOUNDATION === \n")
@@ -92,7 +87,7 @@ def main() -> None:
     print("Initializing Numeric Processor...")
     num_processor = NumericProcessor()
     try:
-        data = [1, 2, 3, 4,5]
+        data = [1, 2, 3, 4, 5]
         print(f"Processing data: {data}")
         if num_processor.validate(data):
             print("Validation: Numeric data verified")
@@ -141,7 +136,6 @@ def main() -> None:
             print(f"Result {i}: {final_result}")
         except Exception as e:
             print(f"Result {i}: Failed. Error: {e}")
-            
 
 
 if __name__ == "__main__":
