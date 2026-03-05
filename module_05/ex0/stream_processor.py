@@ -35,8 +35,8 @@ class NumericProcessor(DataProcessor):
             average = total / count
         else:
             average = 0.0
-        result = f"Processed {count} numeric values,"
-        + f"sum={total}, avg={average}"
+        result = (f"Processed {count} numeric values, "
+                  + f"sum={total}, avg={average}")
         return self.format_output(result)
 
 
@@ -136,6 +136,8 @@ def main() -> None:
             print(f"Result {i}: {final_result}")
         except Exception as e:
             print(f"Result {i}: Failed. Error: {e}")
+
+    print("\nFoundation systems online. Nexus ready for advanced streams.")
 
 
 if __name__ == "__main__":

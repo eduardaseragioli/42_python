@@ -191,11 +191,15 @@ class StreamProcessor:
         for stream in self.streams:
             batch = batches.get(stream.stream_type)
             stream.process_batch(batch)
-            
+
             if isinstance(stream, SensorStream):
-                print(f"- Sensor data: {stream.readings_processed} readings processed")
+                print(
+                    f"- Sensor data: {stream.readings_processed}"
+                    "readings processed")
             elif isinstance(stream, TransactionStream):
-                print(f"- Transaction data: {stream.total_operations} operations processed")
+                print(
+                    f"- Transaction data: {stream.total_operations}"
+                    " operations processed")
             elif isinstance(stream, EventStream):
                 print(f"- Event data: {stream.total_events} events processed")
 
