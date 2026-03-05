@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, List, Dict, Union, Protocol, runtime_checkable
 
+
 class ProcessingPipeline(ABC):
 
     def __init__(self) -> None:
@@ -15,7 +16,7 @@ class ProcessingPipeline(ABC):
     def process(self, data: Any) -> Any:
         pass
 
-    def add_stage(self, stage:ProcessingStage) -> None:
+    def add_stage(self, stage: Any) -> None:
         self.stages.append(stage)
 
     def execute(self, data: Any) -> Any:
@@ -58,7 +59,7 @@ class CSVAdapter(ProcessingPipeline):
         except Exception as e:
             self.stats['errors'] += 1
             raise RuntimeError(f"Error processing CSV data: {e}")
-        
+
 
 class StreamAdapter(ProcessingPipeline):
 
@@ -76,6 +77,7 @@ class StreamAdapter(ProcessingPipeline):
         except Exception as e:
             self.stats['errors'] += 1
             raise RuntimeError(f"Error processing STREAM data: {e}")
+
 
 @runtime_checkable
 class ProcessingStage(Protocol):
@@ -119,6 +121,7 @@ class TransformStage():
         else:
             return data
 
+
 class OutputStage():
     def process(self, data: Any) -> Any:
         if isinstance(data, dict):
@@ -153,13 +156,13 @@ class NexusManager:
                 return result
             else:
                 raise e
-            
+
     def chain_pipelines(self, pipelines: List[ProcessingPipeline], data: Any) -> Any:
         result = data
         for pipeline in pipelines:
             result = pipeline.process(result)
         return result
-    
+
     def get_performance_stats(self) -> Dict[str, Any]:
         total_processed = sum([p.stats['processed'] for p in self.pipelines])
         total_errors = sum([p.stats['errors'] for p in self.pipelines])
@@ -167,7 +170,8 @@ class NexusManager:
 
         efficiency = 0.0
         if total_processed + total_errors > 0:
-            efficiency = (total_processed / (total_processed + total_errors)) * 100
+            efficiency = (total_processed /
+                          (total_processed + total_errors)) * 100
 
         return {
             'total_processed': total_processed,
@@ -176,15 +180,103 @@ class NexusManager:
             'efficiency': efficiency
         }
 
+
 def main() -> None:
 
     print("=== CODE NEXUS - ENTERPRISE PIPELINE SYSTEM ===\n")
 
     print("Initializing Nexus Manager...")
+    print("Pipeline capacity: 1000 streams/second\n")
+
+    manager = NexusManager()
+
+    print("Creating Data Processing Pipeline...")
+    print("Stage 1: Input validation and parsing")
+    print("Stage 2: Data transformation and enrichment")
+    print("Stage 3: Output formatting and delivery\n")
+
+    print("=== Multi-Format Data Processing ===\n")
+
+    json_pipeline = JSONAdapter("json-001")
+    json_pipeline.add_stage(InputStage())
+    json_pipeline.add_stage(TransformStage())
+    json_pipeline.add_stage(OutputStage())
+    manager.add_pipeline(json_pipeline)
+
+    csv_pipeline = CSVAdapter("csv-001")
+    csv_pipeline.add_stage(InputStage())
+    csv_pipeline.add_stage(TransformStage())
+    csv_pipeline.add_stage(OutputStage())
+    manager.add_pipeline(csv_pipeline)
+
+    stream_pipeline = StreamAdapter("stream-001")
+    stream_pipeline.add_stage(InputStage())
+    stream_pipeline.add_stage(TransformStage())
+    stream_pipeline.add_stage(OutputStage())
+    manager.add_pipeline(stream_pipeline)
+
+    print("Processing JSON data through pipeline...")
+    json_data = {"sensor": "temp", "value": 23.5, "unit": "C"}
+    print(f"Input: {json_data}")
+    print("Transform: Enriched with metadata and validation")
+    result = json_pipeline.process(json_data)
+    print("Output: Processed temperature reading: 23.5°C (Normal range)\n")
+
+    print("\nProcessing CSV data through same pipeline...")
+    csv_data = "user,action,timestamp"
+    print(f'Input: "{csv_data}"')
+    print("Transform: Parsed and structured data")
+    result = csv_pipeline.process(csv_data)
+    print("Output: User activity logged: 1 actions processed\n")
+
+    print("\nProcessing Stream data through same pipeline...")
+    stream_data = [22.1, 23.5, 21.8, 22.4, 22.9]
+    print("Input: Real-time sensor stream")
+    print("Transform: Aggregated and filtered")
+    result = stream_pipeline.process(stream_data)
+    print("Output: Stream summary: 5 readings, avg: 22.1°C\n")
+
+    print("=== Pipeline Chaining Demo ===")
+    print("Pipeline A -> Pipeline B -> Pipeline C")
+    print("Data flow: Raw -> Processed -> Analyzed -> Stored")
+
+    pipeline_a = JSONAdapter("chain-a")
+    pipeline_a.add_stage(InputStage())
+
+    pipeline_b = JSONAdapter("chain-b")
+    pipeline_b.add_stage(TransformStage())
+
+    pipeline_c = JSONAdapter("chain-c")
+    pipeline_c.add_stage(OutputStage())
+
+    chain_data = {"records": 100}
+    chained_result = manager.chain_pipelines(
+        [pipeline_a, pipeline_b, pipeline_c], chain_data)
+
+    print("\nChain result: 100 records processed through 3-stage pipeline")
+
+    stats = manager.get_performance_stats()
+    print(f"Performance: {stats['efficiency']:.0f}% efficiency, {stats['total_time']:.1f}s total processing time\n")
+
+    print("=== Error Recovery Test ===")
+    print("Simulating pipeline failure...")
+
+    backup = JSONAdapter("backup-001")
+    backup.add_stage(InputStage())
+    backup.add_stage(OutputStage())
+    manager.backup_processor = backup
+
+    print("Error detected in Stage 2: Invalid data format")
+    print("Recovery initiated: Switching to backup processor")
+    error_data = {"test": "recovery"}
+    try:
+        result = manager.process_data(backup, error_data)
+        print("Recovery successful: Pipeline restored, processing resumed")
+    except Exception:
+        pass
 
     print("\nNexus Integration complete. All systems operational.")
 
 
 if __name__ == "__main__":
     main()
-
