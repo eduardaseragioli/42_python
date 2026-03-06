@@ -274,7 +274,7 @@ def main() -> None:
     manager.chain_pipelines(
         [pipeline_a, pipeline_b, pipeline_c], chain_data)
 
-    print("Chain result: 100 records processed through 3-stage pipeline")
+    print("\nChain result: 100 records processed through 3-stage pipeline")
 
     # Simular um pipeline com erro para reduzir eficiência para ~95%
     error_pipeline = JSONAdapter("error-sim")
