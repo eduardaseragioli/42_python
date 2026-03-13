@@ -1,3 +1,6 @@
+from ex0.CreatureCard import CreatureCard
+
+
 def main() -> None:
     print("=== DataDeck Card Foundation ===\n")
 
@@ -10,7 +13,7 @@ def main() -> None:
         health=5
     )
     info_card = fire.get_card_info()
-    print(f"CreatureCard Info: {info_card}")
+    print(f"CreatureCard Info: \n{info_card}")
 
     print(f"\nPlaying {fire.name} with 6 mana available:")
     game_state: dict = {"active_creatures": []}
@@ -29,6 +32,7 @@ def main() -> None:
     print(f"Playable: {fire.is_playable(3)}")
 
     print("\nAbstract pattern successfully demonstrated!")
+
 
 if __name__ == "__main__":
     main()
