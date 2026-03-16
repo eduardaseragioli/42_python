@@ -84,6 +84,7 @@ class EliteCard(Card, Combatable, Magical):
             'damage_blocked': damage_blocked,
             'still_alive': still_alive
         }
+
     def get_combat_stats(self) -> dict:
         return {
             'attack_power': self.attack_power,

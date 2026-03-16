@@ -1,11 +1,12 @@
 from ex3.GameStrategy import GameStrategy
 
+
 class AggressiveStrategy(GameStrategy):
 
     def execute_turn(self, hand: list, battlefield: list) -> dict:
         mana_used = 0
         cards_played: list = []
-        targets_attacked: list = [] 
+        targets_attacked: list = []
         damage_dealt = 0
 
         hand.sort(key=lambda card: card.cost)
@@ -21,7 +22,7 @@ class AggressiveStrategy(GameStrategy):
         for creature in battlefield:
             targets_attacked.append("Enemy Player")
             damage_dealt += creature.attack
-        
+
         return {
             'strategy': self.get_strategy_name(),
             'actions': {

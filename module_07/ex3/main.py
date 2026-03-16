@@ -1,5 +1,6 @@
 from ex3 import GameEngine, FantasyCardFactory, AggressiveStrategy
 
+
 def main() -> None:
     print("=== DataDeck Game Engine ===\n")
 
@@ -23,14 +24,15 @@ def main() -> None:
     print(f"Hand: {[f'{card.name} ({card.cost})' for card in hand]}")
 
     print("\nTurn execution:")
- 
+
     print(f"Strategy: {turn_result['strategy']}")
     print(f"Actions:{turn_result['actions']}")
-  
+
     print("\nGame Report:")
     print(game.get_engine_status())
 
     print("\nAbstract Factory + Strategy Pattern: Maximum flexibility achieved!")
+
 
 if __name__ == "__main__":
     main()

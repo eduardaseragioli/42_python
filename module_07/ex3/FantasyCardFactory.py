@@ -4,6 +4,7 @@ from ex1.SpellCard import SpellCard
 from ex1.ArtifactCard import ArtifactCard
 from ex3.CardFactory import CardFactory
 
+
 class FantasyCardFactory(CardFactory):
 
     def create_creature(self, name_or_power: str | int | None = None) -> Card:
@@ -60,4 +61,3 @@ class FantasyCardFactory(CardFactory):
             'spells': ['fireball'],
             'artifacts': ['mana_ring']
         }
-        

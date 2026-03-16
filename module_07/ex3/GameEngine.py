@@ -3,6 +3,7 @@ from ex3.CardFactory import CardFactory
 from ex3.GameStrategy import GameStrategy
 import random
 
+
 class GameEngine():
 
     def __init__(self) -> None:
@@ -24,14 +25,16 @@ class GameEngine():
         if not self.factory or not self.strategy:
             raise ValueError("GameEngine is not configured")
         deck = self.factory.create_themed_deck(size=10)
-        hand = random.sample(deck['creatures'] + deck['spells'] + deck['artifacts'], 3)
+        hand = random.sample(deck['creatures'] +
+                             deck['spells'] + deck['artifacts'], 3)
 
         battlefield: list = []
         result_turn = self.strategy.execute_turn(hand, battlefield)
-        
+
         self.turns_simulated += 1
         self.game_stats['total_damage'] += result_turn['actions']['damage_dealt']
-        self.game_stats['cards_played'] += len(result_turn['actions']['cards_played'])
+        self.game_stats['cards_played'] += len(
+            result_turn['actions']['cards_played'])
 
         return {
             'hand': hand,
@@ -44,4 +47,3 @@ class GameEngine():
             'strategy_used': self.strategy.get_strategy_name(),
             'game_stats': self.game_stats
         }
-        

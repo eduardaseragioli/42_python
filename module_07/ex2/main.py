@@ -2,6 +2,7 @@ from ex2.EliteCard import EliteCard
 from ex2.Magical import Magical
 from ex2.Combatable import Combatable
 
+
 def main() -> None:
     print("=== DataDeck Ability System ===\n")
 
@@ -31,5 +32,7 @@ def main() -> None:
     print(f"Mana channel: {arcane_card.channel_mana(3)}")
 
     print("\nMultiple interface implementation successful!")
+
+
 if __name__ == "__main__":
     main()

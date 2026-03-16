@@ -34,8 +34,8 @@ class ArtifactCard(Card):
                 'durability_remaining': 0,
                 'status': 'destroyed'
             }
-        
+
     def get_card_info(self) -> dict:
         info = super().get_card_info()
-        info['type'] = self.card_type  
+        info['type'] = self.card_type
         return info
