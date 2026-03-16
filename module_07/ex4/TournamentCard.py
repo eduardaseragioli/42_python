@@ -5,9 +5,11 @@ from ex4.Rankable import Rankable
 
 class TournamentCard(Card, Combatable, Rankable):
 
-    def __init__(self, name: str, cost: int, rarity: str, attack: int, health: int):
+    def __init__(
+            self, name: str, cost: int,
+            rarity: str, attack: int, health: int):
         super().__init__(name, cost, rarity)
-        self.attack = attack
+        self.attack_power = attack
         self.health = health
         self.wins = 0
         self.losses = 0
@@ -42,17 +44,50 @@ class TournamentCard(Card, Combatable, Rankable):
             raise ValueError("The target dosent't have health")
 
         if hasattr(target, 'health'):
-            target.health -= self.attack
+            target.health -= self.attack_power
             target_name = target.name if hasattr(target, 'name') else "Unknown"
         else:
-            target['health'] -= self.attack
+            target['health'] -= self.attack_power
             target_name = target.get('name', 'Unknown')
 
         return {
             'attacker': self.name,
             'target': target_name,
-            'damage_dealt': self.attack,
+            'damage_dealt': self.attack_power,
             'combat_resolved': True
+        }
+
+    def defend(self, incoming_damage: int) -> dict:
+        if not isinstance(incoming_damage, int):
+            raise ValueError("Error")
+        if incoming_damage < 0:
+            raise ValueError("Error")
+
+        health_before = self.health
+
+        self.health = self.health - incoming_damage
+
+        if self.health < 0:
+            self.health = 0
+
+        defeated = (self.health == 0)
+
+        return {
+            'defender': self.name,
+            'damage_receiver': incoming_damage,
+            'health_before': health_before,
+            'health_after': self.health,
+            'defeated': defeated
+        }
+
+    def get_combat_stats(self) -> dict:
+        alive = (self.health > 0)
+
+        return {
+            'name': self.name,
+            'attack_power': self.attack_power,
+            'current_health': self.health,
+            'alive': alive
         }
 
     def calculate_rating(self) -> int:
@@ -68,6 +103,31 @@ class TournamentCard(Card, Combatable, Rankable):
 
         self.rating = new_rating
         return new_rating
+
+    def update_wins(self, wins: int) -> None:
+        if not isinstance(wins, int) or wins < 0:
+            raise ValueError("The wins must be a non negative integer")
+
+        self.wins = self.wins + wins
+
+    def update_losses(self, losses: int) -> None:
+        if not isinstance(losses, int) or losses < 0:
+            raise ValueError("The losses must be a non negative integer")
+
+        self.losses = self.losses + losses
+
+    def get_rank_info(self) -> dict:
+        self.calculate_rating()
+
+        record = str(self.wins) + "-" + str(self.losses)
+
+        return {
+            'name': self.name,
+            'rating': self.rating,
+            'wins': self.wins,
+            'losses': self.losses,
+            'record': record
+        }
 
     def get_tournament_stats(self) -> dict:
         total_matches = self.wins + self.losses
