@@ -20,36 +20,34 @@ class EliteCard(Card, Combatable, Magical):
         return {
             'card_played': self.name,
             'mana_used': self.cost,
-            'effect':
+            'effect': "Elite card played successfully",
             'combat_power': self.attack_power,
             'magic_power': self.spell_power
         }
 
     def cast_spell(self, spell_name: str, targets: list) -> dict:
-        self.spell_power = 4
-
         if self.mana < self.spell_power:
             return {
                 'caster': self.name,
                 'spell': spell_name,
-                'targets': self.targets,
+                'targets': targets,
                 'mana_used': 0,
                 'error': 'Not enough mana'
             }
-        self.mana -= self.spell_cost
+        self.mana -= self.spell_power
         return {
             'caster': self.name,
             'spell': spell_name,
             'targets': targets,
-            'mana_used': self.spell_cost
+            'mana_used': self.spell_power
         }
 
     def channel_mana(self, amount: int) -> dict:
         if amount <= 0:
             return {
                 'channeled': 0,
-                'total_mana': self.mana
-                'erro': 'Invalid mana'
+                'total_mana': self.mana,
+                'error': 'Invalid mana'
             }
         self.mana += amount
         return {
@@ -59,7 +57,7 @@ class EliteCard(Card, Combatable, Magical):
 
     def get_magic_stats(self) -> dict:
         return {
-            'mana': self.mana;
+            'mana': self.mana,
             'spell_power': self.spell_power
         }
 
@@ -71,7 +69,7 @@ class EliteCard(Card, Combatable, Magical):
         return {
             'attacker': self.name,
             'target': target_name,
-            'damage': self.attack_power
+            'damage': self.attack_power,
             'combat_type': 'melee'
         }
 

@@ -7,6 +7,7 @@ class SpellCard(Card):
                  rarity: str, effect_type: str) -> None:
         super().__init__(name, cost, rarity)
         self.effect_type = effect_type
+        self.card_type = 'spell'
 
     def get_effect_description(self) -> str:
         if self.effect_type == "damage":
@@ -37,3 +38,8 @@ class SpellCard(Card):
             'targets_affected': len(targets),
             'result': self.get_effect_description()
         }
+
+    def get_card_info(self) -> dict:
+        info = super().get_card_info()
+        info['type'] = self.card_type
+        return info

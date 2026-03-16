@@ -14,10 +14,11 @@ class CreatureCard(Card):
         super().__init__(name, cost, rarity)
         self.attack = attack
         self.health = health
+        self.card_type = 'creature'
 
     def get_card_info(self) -> dict:
         info = super().get_card_info()
-        info['type'] = 'Creature'
+        info['type'] = self.card_type
         info['attack'] = self.attack
         info['health'] = self.health
         return info
