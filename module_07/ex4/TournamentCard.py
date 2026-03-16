@@ -33,10 +33,27 @@ class TournamentCard(Card, Combatable, Rankable):
             return {
                 'card_played': self.name,
                 'mana_used': self.cost,
-                'effect': self.effect
+                'effect': effect
             }
 
     def attack(self, target) -> dict:
+        if not hasattr(target, 'health') and 'health' not in target:
+            raise ValueError("The target dosent't have health")
+
+        if hasattr(target, 'health'):
+            target.health -= self.attack
+            target_name = target.name if hasattr(target, 'name') else "Unknown"
+        else:
+            target['health'] -= self.attack
+            target_name = target.get('name', 'Unknown')
+
+        return {
+            'attacker': self.name,
+            'target': target_name,
+            'damage_dealt': self.attack,
+            'combat_resolved': True
+        }
+
 
     def calculate_rating(self) -> int:
 
