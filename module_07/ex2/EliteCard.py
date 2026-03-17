@@ -1,12 +1,16 @@
+"""Elite card implementing both combat and magical interfaces."""
+
 from ex0.Card import Card
 from ex2.Combatable import Combatable
 from ex2.Magical import Magical
 
 
 class EliteCard(Card, Combatable, Magical):
+    """Hybrid card with melee and spellcasting capabilities."""
 
     def __init__(self, name: str, cost: int, rarity: str, attack_power: int,
-                 health: int, mana: int, spell_power: int):
+                 health: int, mana: int, spell_power: int) -> None:
+        """Initialize elite card attributes."""
 
         super().__init__(name, cost, rarity)
         self.attack_power = attack_power
@@ -15,6 +19,7 @@ class EliteCard(Card, Combatable, Magical):
         self.spell_power = spell_power
 
     def play(self, game_state: dict) -> dict:
+        """Play elite card and expose combat/magic stats."""
         if not isinstance(game_state, dict):
             raise ValueError("The game_state is not a Dictionary")
         return {
@@ -25,7 +30,8 @@ class EliteCard(Card, Combatable, Magical):
             'magic_power': self.spell_power
         }
 
-    def cast_spell(self, spell_name: str, targets: list) -> dict:
+    def cast_spell(self, spell_name: str, targets) -> dict:
+        """Cast a spell if enough mana is available."""
         if self.mana < self.spell_power:
             return {
                 'caster': self.name,
@@ -43,6 +49,7 @@ class EliteCard(Card, Combatable, Magical):
         }
 
     def channel_mana(self, amount: int) -> dict:
+        """Increase mana pool by a positive amount."""
         if amount <= 0:
             return {
                 'channeled': 0,
@@ -56,12 +63,14 @@ class EliteCard(Card, Combatable, Magical):
         }
 
     def get_magic_stats(self) -> dict:
+        """Return magical attributes."""
         return {
             'mana': self.mana,
             'spell_power': self.spell_power
         }
 
     def attack(self, target) -> dict:
+        """Attack a dictionary target or a generic object."""
         if isinstance(target, dict):
             target_name = target.get('name', 'Enemy')
         else:
@@ -74,6 +83,7 @@ class EliteCard(Card, Combatable, Magical):
         }
 
     def defend(self, incoming_damage: int) -> dict:
+        """Block part of incoming damage and update health."""
         damage_blocked = min(3, incoming_damage)
         damage_taken = incoming_damage - damage_blocked
         self.health -= damage_taken
@@ -86,6 +96,7 @@ class EliteCard(Card, Combatable, Magical):
         }
 
     def get_combat_stats(self) -> dict:
+        """Return combat attributes."""
         return {
             'attack_power': self.attack_power,
             'health': self.health

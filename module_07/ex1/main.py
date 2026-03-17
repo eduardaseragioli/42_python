@@ -1,10 +1,14 @@
+"""Demo script for exercise 1 deck polymorphism."""
+
 from ex0.CreatureCard import CreatureCard
 from ex1.SpellCard import SpellCard
 from ex1.ArtifactCard import ArtifactCard
 from ex1.Deck import Deck
+from typing import Any
 
 
 def main() -> None:
+    """Run deck builder and polymorphism demo."""
     print("=== DataDeck Deck Builder ===\n")
 
     print("Building deck with different card types...")
@@ -36,7 +40,7 @@ def main() -> None:
         card_type = type(card).__name__.replace("Card", "")
         print(f"Drew: {card.name} ({card_type})")
 
-        result = card.play({})
+        result: dict[str, Any] = card.play({})
         print(f"Play result: {result}\n")
 
     print("\nPolymorphism in action: Same interface,"

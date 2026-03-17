@@ -1,4 +1,3 @@
-from ex0.Card import Card
 from ex3.CardFactory import CardFactory
 from ex3.GameStrategy import GameStrategy
 import random
@@ -12,7 +11,8 @@ class GameEngine():
         self.turns_simulated: int = 0
         self.game_stats: dict = {}
 
-    def configure_engine(self, factory: CardFactory, strategy: GameStrategy) -> None:
+    def configure_engine(self, factory: CardFactory,
+                         strategy: GameStrategy) -> None:
         self.factory = factory
         self.strategy = strategy
         self.turns_simulated = 0
@@ -32,7 +32,8 @@ class GameEngine():
         result_turn = self.strategy.execute_turn(hand, battlefield)
 
         self.turns_simulated += 1
-        self.game_stats['total_damage'] += result_turn['actions']['damage_dealt']
+        self.game_stats['total_damage'] += result_turn[
+            'actions']['damage_dealt']
         self.game_stats['cards_played'] += len(
             result_turn['actions']['cards_played'])
 

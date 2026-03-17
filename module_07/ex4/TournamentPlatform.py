@@ -1,6 +1,7 @@
 from ex4.TournamentCard import TournamentCard
 import random
 
+
 class TournamentPlatform():
 
     def __init__(self):
@@ -14,14 +15,14 @@ class TournamentPlatform():
         card_id = "card_" + str(len(self.cards) + 1)
         self.cards[card_id] = card
         return card_id
-    
+
     def create_match(self, card1_id: str, card2_id: str) -> dict:
         if card1_id not in self.cards or card2_id not in self.cards:
             raise ValueError("Card id isn't in the plataform")
-        
+
         if card1_id == card2_id:
             raise ValueError("A card cannot play against itself")
-        
+
         card1 = self.cards[card1_id]
         card2 = self.cards[card2_id]
 
@@ -72,26 +73,16 @@ class TournamentPlatform():
     def generate_tournament_report(self) -> dict:
         total_cards = len(self.cards)
 
-        leaderboard = self.get_leaderboard()
-
-        if not leaderboard:
-            leader = None
-        else:
-            leader = leaderboard[0]
-
         if total_cards == 0:
             avg_rating = 0
         else:
-            avg_rating = sum(card.rating for card in self.cards.values()) / total_cards
-
+            avg_rating = sum(
+                card.rating for card in self.cards.values()
+            ) / total_cards
 
         return {
             'total_cards': total_cards,
-            'total_matches': self.matches_played,
-            'leaderboard': leaderboard,
-            'leader': leader,
-            'avg_rating': avg_rating
+            'matches_played': self.matches_played,
+            'avg_rating': avg_rating,
+            'platform_status': 'active'
         }
-
-
-

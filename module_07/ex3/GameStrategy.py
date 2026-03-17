@@ -1,3 +1,5 @@
+"""Strategy interface for turn execution behavior."""
+
 from abc import ABC, abstractmethod
 
 

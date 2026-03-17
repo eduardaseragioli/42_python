@@ -1,15 +1,22 @@
+"""Deck abstraction for card collection management."""
+
 import random
 from ex0.Card import Card
 
 
 class Deck():
-    def __init__(self):
+    """Represents a list of cards with deck operations."""
+
+    def __init__(self) -> None:
+        """Initialize an empty deck."""
         self.cards: list[Card] = []
 
     def add_card(self, card: Card) -> None:
+        """Append a card to the deck."""
         self.cards.append(card)
 
     def remove_card(self, card_name: str) -> bool:
+        """Remove first card that matches the provided name."""
         for card in self.cards:
             if card.name == card_name:
                 self.cards.remove(card)
@@ -18,14 +25,17 @@ class Deck():
         return False
 
     def shuffle(self) -> None:
+        """Shuffle deck order in place."""
         random.shuffle(self.cards)
 
     def draw_card(self) -> Card:
+        """Draw and remove the top card from the deck."""
         if not self.cards:
             raise IndexError('Cannot draw from an empty deck')
         return self.cards.pop(0)
 
     def get_deck_stats(self) -> dict:
+        """Return deck composition and average cost statistics."""
         total_cards = len(self.cards)
         creatures = 0
         spells = 0

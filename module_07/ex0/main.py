@@ -1,7 +1,9 @@
 from ex0.CreatureCard import CreatureCard
+from typing import Any
 
 
 def main() -> None:
+    """Run exercise 0 demonstration."""
     print("=== DataDeck Card Foundation ===\n")
 
     print("Testing Abstract Base Class Design:\n")
@@ -16,7 +18,7 @@ def main() -> None:
     print(f"CreatureCard Info: \n{info_card}")
 
     print(f"\nPlaying {fire.name} with 6 mana available:")
-    game_state: dict = {"active_creatures": []}
+    game_state: dict[str, Any] = {"active_creatures": []}
     print(f"Playable: {fire.is_playable(6)}")
     print(f"Play result: {fire.play(game_state)}")
 
