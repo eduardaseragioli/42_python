@@ -12,7 +12,7 @@ def is_in_venv() -> bool:
 
 def get_env_name() -> str:
     if is_in_venv():
-       return os.path.basename(sys.prefix)
+        return os.path.basename(sys.prefix)
     return "None detected"
 
 
@@ -41,6 +41,7 @@ def print_outside_message() -> None:
     print("activate # On Windows")
 
     print("\nThen run this program again.")
+
 
 def print_inside_message() -> None:
     print("MATRIX STATUS: Welcome to the construct\n")
