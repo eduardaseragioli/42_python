@@ -43,8 +43,6 @@ def check_dependencies() -> dict[str, dict[str, object]]:
     return status
 
 
-
-
 def print_dependency_report(status: dict[str, dict[str, object]]) -> None:
     print("\nLOADING STATUS: Loading programs...\n")
     print("Checking dependencies:")
