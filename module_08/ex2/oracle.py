@@ -105,7 +105,7 @@ def main() -> None:
         print("The Oracle sees configuration issues.")
         sys.exit(1)
     else:
-        print("The Oracle sees all configurations.")
+        print("\nThe Oracle sees all configurations.")
         sys.exit(0)
 
 
