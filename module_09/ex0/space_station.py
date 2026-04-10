@@ -9,7 +9,7 @@ class SpaceStation(BaseModel):
     crew_size: int = Field(..., ge=1, le=20)
     power_level: float = Field(..., ge=0.0, le=100.0)
     oxygen_level: float = Field(..., ge=0.0, le=100.0)
-    last_maintenance: datetime = Field(...)
+    last_maintenance: datetime
     is_operational: bool = Field(default=True)
     notes: Optional[str] = Field(default=None, max_length=200)
 
@@ -25,7 +25,7 @@ def main() -> None:
             crew_size=6,
             power_level=85.5,
             oxygen_level=92.3,
-            last_maintenance="2024-01-15T10:30:00",
+            last_maintenance=datetime(2024, 1, 1),
             is_operational=True,
             notes=None
         )
@@ -37,7 +37,7 @@ def main() -> None:
         print(f"Oxygen: {station.oxygen_level}%")
 
         if station.is_operational:
-            print(f"Status: Operational")
+            print("Status: Operational")
         else:
             print("Status: Non-Operational")
 
@@ -47,13 +47,13 @@ def main() -> None:
     print("========================================")
 
     try:
-        invalid_station = SpaceStation(
+        SpaceStation(
             station_id="ISS001",
             name="Invalid Station",
             crew_size=50,
             power_level=85.5,
             oxygen_level=92.3,
-            last_maintenance="2024-01-15T10:30:00",
+            last_maintenance=datetime(2024, 1, 1),
             is_operational=True,
             notes=None
         )
