@@ -48,6 +48,7 @@ def main() -> None:
     print(f"counter_a call 2: {counter_a()}")
     print(f"counter_b call 1: {counter_b()}")
 
+
     print("\nTesting spell accumulator...")
     acc = spell_accumulator(100)
     print(f"Base 100, add 20: {acc(20)}")
@@ -58,7 +59,6 @@ def main() -> None:
     frost = enchantment_factory("Frozen")
     print(flame("Sword"))
     print(frost("Shield"))
-
 
     print("\nTesting memory vault...")
     vault = memory_vault()
