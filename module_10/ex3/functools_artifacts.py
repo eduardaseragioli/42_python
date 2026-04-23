@@ -71,6 +71,7 @@ def main() -> None:
     print(f"Fib(10): {memoized_fibonacci(10)}")
     print(f"Fib(15): {memoized_fibonacci(15)}")
 
+
     print("\nTesting spell dispatcher...")
     dispatcher = spell_dispatcher()
     print(f"Damage spell: {dispatcher(42)}")
