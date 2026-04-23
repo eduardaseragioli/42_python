@@ -59,6 +59,7 @@ def main() -> None:
     print(flame("Sword"))
     print(frost("Shield"))
 
+
     print("\nTesting memory vault...")
     vault = memory_vault()
     vault['store']('secret', 42)
